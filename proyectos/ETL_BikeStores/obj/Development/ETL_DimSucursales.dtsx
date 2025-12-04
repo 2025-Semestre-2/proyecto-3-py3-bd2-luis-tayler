@@ -1,0 +1,753 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/1/2025 2:37:43 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AQUARUIM"
+  DTS:CreatorName="AQUARUIM\Tayle"
+  DTS:DTSID="{23902F46-5BBB-4ECC-A9D0-FAA4947380BD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LocaleID="5130"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{5F536942-0AF0-4356-B16D-470F1A0A93F2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStores]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0884BDA0-65F5-4126-B174-73606673B84B}"
+      DTS:ObjectName="localhost.BikeStores">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStores;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{0884BDA0-65F5-4126-B174-73606673B84B}localhost.BikeStores;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStoresDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B47FDC1E-9B1E-4D0C-AFF1-0726063A58D5}"
+      DTS:ObjectName="localhost.BikeStoresDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStoresDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{B47FDC1E-9B1E-4D0C-AFF1-0726063A58D5}localhost.BikeStoresDW;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStoresStage]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F7FD1092-F480-4794-9813-FA1EBC92AB9B}"
+      DTS:ObjectName="localhost.BikeStoresStage">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStoresStage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{F7FD1092-F480-4794-9813-FA1EBC92AB9B}localhost.BikeStoresStage;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Cargar Dim_Sucursales"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2F746A80-1393-40E7-BCCA-ACD3710166C7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cargar Dim_Sucursales"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Cargar Dim_Sucursales\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Sucursales]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StoreID_NK]"
+                      cachedDataType="i4"
+                      cachedName="StoreID_NK"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StoreID_NK]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[StoreID_NK]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NombreTienda]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="NombreTienda"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NombreTienda]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreTienda]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Telefono]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Telefono"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Telefono]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Calle]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Calle"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Calle]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Calle]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Ciudad]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Ciudad"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Ciudad]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Ciudad]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Estado]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Estado"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Estado]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Estado]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CodigoPostal]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="CodigoPostal"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CodigoPostal]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[CodigoPostal]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Pais]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Pais"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pais]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pais]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SucursalKey]"
+                      dataType="i4"
+                      name="SucursalKey" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StoreID_NK]"
+                      dataType="i4"
+                      name="StoreID_NK" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NombreTienda]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="NombreTienda" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Telefono" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Calle]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Calle" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Ciudad]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Ciudad" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Estado]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Estado" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CodigoPostal]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="CodigoPostal" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pais]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Pais" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar Dim_Sucursales\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+    s.store_id     AS StoreID_NK,
+    s.store_name   AS NombreTienda,
+    s.phone        AS Telefono,
+    s.email        AS Email,
+    s.street       AS Calle,
+    s.city         AS Ciudad,
+    s.state        AS Estado,
+    s.zip_code     AS CodigoPostal,
+    'USA'          AS Pais      
+FROM [dbo].[stores] AS s;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar Dim_Sucursales\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.BikeStoresStage]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.BikeStoresStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[StoreID_NK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StoreID_NK]"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[StoreID_NK]"
+                      name="StoreID_NK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreTienda]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NombreTienda]"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreTienda]"
+                      name="NombreTienda"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Telefono]"
+                      length="25"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]"
+                      name="Telefono"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Calle]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Calle]"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Calle]"
+                      name="Calle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Ciudad]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Ciudad]"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Ciudad]"
+                      name="Ciudad"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Estado]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Estado]"
+                      length="10"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Estado]"
+                      name="Estado"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[CodigoPostal]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CodigoPostal]"
+                      length="5"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[CodigoPostal]"
+                      name="CodigoPostal"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pais]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pais]"
+                      length="3"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].Columns[Pais]"
+                      name="Pais"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StoreID_NK]"
+                      dataType="i4"
+                      name="StoreID_NK" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NombreTienda]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="NombreTienda" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Telefono" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Calle]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Calle" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Ciudad]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Ciudad" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Estado]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Estado" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CodigoPostal]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="CodigoPostal" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Pais]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Pais" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StoreID_NK]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StoreID_NK]"
+                      name="StoreID_NK" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NombreTienda]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NombreTienda]"
+                      name="NombreTienda" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Telefono]"
+                      name="Telefono" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Calle]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Calle]"
+                      name="Calle" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Ciudad]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Ciudad]"
+                      name="Ciudad" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Estado]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Estado]"
+                      name="Estado" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CodigoPostal]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CodigoPostal]"
+                      name="CodigoPostal" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pais]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Pais]"
+                      name="Pais" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Cargar Dim_Sucursales.Paths[OLE DB Source Output]"
+              endId="Package\Cargar Dim_Sucursales\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Cargar Dim_Sucursales\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Limpiar Dim_Sucursales"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C88BA45C-514E-4155-970E-70443A6B1FC7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Limpiar Dim_Sucursales"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B47FDC1E-9B1E-4D0C-AFF1-0726063A58D5}"
+          SQLTask:SqlStatementSource="DELETE FROM Dim_Sucursales;&#xA;DBCC CHECKIDENT ('Dim_Sucursales', RESEED, 0);&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{050E1EF5-2169-4216-B6C7-4B4A067962B8}"
+      DTS:From="Package\Limpiar Dim_Sucursales"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Cargar Dim_Sucursales" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="196,41.6"
+          Id="Package\Cargar Dim_Sucursales"
+          TopLeft="134,189" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Limpiar Dim_Sucursales"
+          TopLeft="135,72" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="233,114">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75"
+              Start="0,0"
+              End="0,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Cargar Dim_Sucursales">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Cargar Dim_Sucursales\OLE DB Source"
+          TopLeft="127,122" />
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\Cargar Dim_Sucursales\OLE DB Destination"
+          TopLeft="406,120" />
+        <EdgeLayout
+          Id="Package\Cargar Dim_Sucursales.Paths[OLE DB Source Output]"
+          TopLeft="284,142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="122,0"
+              Start="0,0"
+              End="114.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="114.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar Dim_Sucursales\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar Dim_Sucursales\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
