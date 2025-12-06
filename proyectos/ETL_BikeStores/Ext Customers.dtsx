@@ -1,0 +1,783 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/3/2025 7:01:21 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LTREJOS"
+  DTS:CreatorName="LTREJOS\luist"
+  DTS:DTSID="{0788FF55-C63A-4DC7-ADE3-5965C35B3700}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LocaleID="5130"
+  DTS:ObjectName="Ext Customers"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{1E392D32-73EE-4CE5-A747-CBBB3395017F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStores]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7D06AA5F-924F-44C2-AF67-17BCAD4DE286}"
+      DTS:ObjectName="localhost.BikeStores">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStores;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Ext Customers-{7D06AA5F-924F-44C2-AF67-17BCAD4DE286}localhost.BikeStores;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStoresStage]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{66864168-09E6-4774-997A-67748E4F79CA}"
+      DTS:ObjectName="localhost.BikeStoresStage">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStoresStage;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Ext Customers-{66864168-09E6-4774-997A-67748E4F79CA}localhost.BikeStoresStage;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Borrar Tabla"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{A58D6CC1-B967-41F0-BC6B-5B0350D68693}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Borrar Tabla"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{66864168-09E6-4774-997A-67748E4F79CA}"
+          SQLTask:SqlStatementSource="drop table if exists customers" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Copiar Datos"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{559A62D1-63C5-47C4-95BB-11AA88AAD75C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copiar Datos"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Copiar Datos\Copiar a Destino"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Copiar a Destino"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[customers]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Copiar Datos\Copiar a Destino.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.BikeStoresStage]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.BikeStoresStage]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].Columns[customer_id]"
+                      cachedDataType="i4"
+                      cachedName="customer_id"
+                      externalMetadataColumnId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[customer_id]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[customer_id]" />
+                    <inputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].Columns[first_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="first_name"
+                      externalMetadataColumnId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[first_name]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[first_name]" />
+                    <inputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].Columns[last_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="last_name"
+                      externalMetadataColumnId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[last_name]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[last_name]" />
+                    <inputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].Columns[phone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="phone"
+                      externalMetadataColumnId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[phone]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[phone]" />
+                    <inputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].Columns[email]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="email"
+                      externalMetadataColumnId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[email]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[email]" />
+                    <inputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].Columns[street]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="street"
+                      externalMetadataColumnId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[street]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[street]" />
+                    <inputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].Columns[city]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[city]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[city]" />
+                    <inputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].Columns[state]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="state"
+                      externalMetadataColumnId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[state]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[state]" />
+                    <inputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].Columns[zip_code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="zip_code"
+                      externalMetadataColumnId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[zip_code]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[zip_code]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[customer_id]"
+                      dataType="i4"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[first_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="first_name" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[last_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="last_name" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="phone" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[street]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="street" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB].ExternalColumns[zip_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="zip_code" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Copiar Datos\Copiar a Destino.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Copiar Datos\Copiar a Destino.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Copiar a Destino.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Copiar Datos\Copiar a Destino.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Copiar Datos\Extraer de Origen"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Extraer de Origen"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[sales].[customers]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Copiar Datos\Extraer de Origen.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.BikeStores]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.BikeStores]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[customer_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[customer_id]"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[first_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[first_name]"
+                      length="255"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[first_name]"
+                      name="first_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[last_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[last_name]"
+                      length="255"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[last_name]"
+                      name="last_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[phone]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[phone]"
+                      length="25"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[phone]"
+                      name="phone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[email]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[email]"
+                      length="255"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[email]"
+                      name="email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[street]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[street]"
+                      length="255"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[street]"
+                      name="street"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[city]"
+                      length="50"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[city]"
+                      name="city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[state]"
+                      length="25"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[state]"
+                      name="state"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[zip_code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[zip_code]"
+                      length="5"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].Columns[zip_code]"
+                      name="zip_code"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[customer_id]"
+                      dataType="i4"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[first_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="first_name" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[last_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="last_name" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="phone" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[street]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="street" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB].ExternalColumns[zip_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="zip_code" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[customer_id]"
+                      dataType="i4"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[first_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[first_name]"
+                      name="first_name" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[last_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[last_name]"
+                      name="last_name" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[phone]"
+                      name="phone" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[email]"
+                      name="email" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[street]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[street]"
+                      name="street" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[state]"
+                      name="state" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[zip_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[zip_code]"
+                      name="zip_code" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Copiar Datos.Paths[Salida de origen de OLE DB]"
+              endId="Package\Copiar Datos\Copiar a Destino.Inputs[Entrada de destino de OLE DB]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Copiar Datos\Extraer de Origen.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Crear Tabla"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{3033A441-3652-442F-9E2F-9C1E1CCD91E6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Crear Tabla"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{66864168-09E6-4774-997A-67748E4F79CA}"
+          SQLTask:SqlStatementSource="CREATE TABLE [dbo].[customers](&#xA;&#x9;[customer_id] [int] NOT NULL,&#xA;&#x9;[first_name] [varchar](255) NOT NULL,&#xA;&#x9;[last_name] [varchar](255) NOT NULL,&#xA;&#x9;[phone] [varchar](25) NULL,&#xA;&#x9;[email] [varchar](255) NOT NULL,&#xA;&#x9;[street] [varchar](255) NULL,&#xA;&#x9;[city] [varchar](50) NULL,&#xA;&#x9;[state] [varchar](25) NULL,&#xA;&#x9;[zip_code] [varchar](5) NULL&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{8F8E501F-944A-4029-852C-90E336FFAFF2}"
+      DTS:From="Package\Borrar Tabla"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Crear Tabla" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{9F00A4E5-1FEF-4559-B483-B301AB1B5F5D}"
+      DTS:From="Package\Crear Tabla"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 1"
+      DTS:To="Package\Copiar Datos" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Borrar Tabla"
+          TopLeft="164.16666014327,103.133334152963" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Copiar Datos"
+          TopLeft="159.999993642172,284.266668925815" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Crear Tabla"
+          TopLeft="166.666660043929,201.066668264601" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="232.816660093599,144.733334152963">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.3333341116375"
+              Start="0,0"
+              End="0,48.8333341116375">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.8333341116375" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="231.53332684305,242.666668264601">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.6000006612141"
+              Start="0,0"
+              End="0,34.1000006612141">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.1000006612141" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Copiar Datos">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\Copiar Datos\Extraer de Origen"
+          TopLeft="215.833324756888,124.800000991821" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Copiar Datos\Copiar a Destino"
+          TopLeft="214.999991456668,231.400001839002" />
+        <EdgeLayout
+          Id="Package\Copiar Datos.Paths[Salida de origen de OLE DB]"
+          TopLeft="294.416658106778,166.400000991821">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.0000008471808"
+              Start="0,0"
+              End="0,57.5000008471808">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.5000008471808" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Copiar Datos\Copiar a Destino">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Copiar Datos\Extraer de Origen">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
