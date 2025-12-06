@@ -1,0 +1,84 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/1/2025 1:40:11 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AQUARUIM"
+  DTS:CreatorName="AQUARUIM\Tayle"
+  DTS:DTSID="{139E0814-BDCE-491E-8D14-8897F9BBF54C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LocaleID="5130"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{086D7379-A10C-49B5-943A-83C6CEEBF490}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStores]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D3F07B81-4601-4D60-BCC4-7E0C80CDFB4E}"
+      DTS:ObjectName="localhost.BikeStores">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStores;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{D3F07B81-4601-4D60-BCC4-7E0C80CDFB4E}localhost.BikeStores;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStoresDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{041CE30C-F43E-4107-81C3-3F0A5C6B1446}"
+      DTS:ObjectName="localhost.BikeStoresDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStoresDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{041CE30C-F43E-4107-81C3-3F0A5C6B1446}localhost.BikeStoresDW;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Cargar Dim_Fecha"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6E4EB702-FD33-4FB0-A358-64464A3AFA1F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cargar Dim_Fecha"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{041CE30C-F43E-4107-81C3-3F0A5C6B1446}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('Dim_Fecha', 'U') IS NOT NULL&#xA;BEGIN&#xA;    DELETE FROM Dim_Fecha;&#xA;END;&#xA;&#xA;DECLARE @FechaInicio DATE = '2015-01-01';&#xA;DECLARE @FechaFin    DATE = '2018-12-31';&#xA;&#xA;;WITH CteFechas AS (&#xA;    SELECT @FechaInicio AS Fecha&#xA;    UNION ALL&#xA;    SELECT DATEADD(DAY, 1, Fecha)&#xA;    FROM CteFechas&#xA;    WHERE Fecha &lt; @FechaFin&#xA;)&#xA;INSERT INTO Dim_Fecha&#xA;(&#xA;    FechaKey,&#xA;    FechaCompleta,&#xA;    Anio,&#xA;    Mes,&#xA;    Dia,&#xA;    NombreMes,&#xA;    NombreDiaSemana,&#xA;    Trimestre,&#xA;    EsFinDeSemana&#xA;)&#xA;SELECT&#xA;    CONVERT(INT, FORMAT(Fecha, 'yyyyMMdd'))     AS FechaKey,&#xA;    Fecha                                       AS FechaCompleta,&#xA;    YEAR(Fecha)                                 AS Anio,&#xA;    MONTH(Fecha)                                AS Mes,&#xA;    DAY(Fecha)                                  AS Dia,&#xA;    DATENAME(MONTH, Fecha)                      AS NombreMes,&#xA;    DATENAME(WEEKDAY, Fecha)                    AS NombreDiaSemana,&#xA;    DATEPART(QUARTER, Fecha)                    AS Trimestre,&#xA;    CASE &#xA;        WHEN DATENAME(WEEKDAY, Fecha) IN ('Saturday','Sunday') &#xA;             THEN 1 &#xA;        ELSE 0 &#xA;    END                                         AS EsFinDeSemana&#xA;FROM CteFechas&#xA;OPTION (MAXRECURSION 32767);&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Cargar Dim_Fecha"
+          TopLeft="117,148" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
