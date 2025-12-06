@@ -109,6 +109,6 @@ Filtros:
 - Marca  
 
 Incluye subtotales y enumeración por marca.
----
+
 TEC II SEMESTRE 2025 BASES DE DATOS II 
 CRISTIAN CAMPOS AGUERO
