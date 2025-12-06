@@ -1,0 +1,1946 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/1/2025 1:00:47 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AQUARUIM"
+  DTS:CreatorName="AQUARUIM\Tayle"
+  DTS:DTSID="{86EEF006-AF1D-42C4-B5BB-BAF7DA5E8C31}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LocaleID="5130"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{B1AA5E78-FADC-4300-B855-1BA05A720E1C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStores]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{17B1E500-0D00-411C-8B75-C287C4A05401}"
+      DTS:ObjectName="localhost.BikeStores">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStores;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{17B1E500-0D00-411C-8B75-C287C4A05401}localhost.BikeStores;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStoresDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B9E10E95-C1CC-4EE1-ADBF-480496B82441}"
+      DTS:ObjectName="localhost.BikeStoresDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStoresDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{B9E10E95-C1CC-4EE1-ADBF-480496B82441}localhost.BikeStoresDW;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.BikeStoresStage]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A1EF6552-3286-4CA6-BB18-C6541BA4232A}"
+      DTS:ObjectName="localhost.BikeStoresStage">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=BikeStoresStage;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{A1EF6552-3286-4CA6-BB18-C6541BA4232A}localhost.BikeStoresStage;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{599DF6AA-7B33-43BE-A621-8FEEEA93D111}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="CurrentDate">
+      <DTS:VariableValue
+        DTS:DataType="7">12/1/2025 1:33:18 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Cargar Dim_Empleados (SCD2)"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{35C11D2C-0CB1-4347-BEEE-8D0CEDBDAFD3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cargar Dim_Empleados (SCD2)"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Output].Columns[FechaFin]"
+                      dataType="dbTimeStamp"
+                      description="FechaFin"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Output].Columns[FechaFin]"
+                      name="FechaFin"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP)(@[User::CurrentDate])</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP)(@[User::CurrentDate])</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Output].Columns[FechaInicio]"
+                      dataType="dbTimeStamp"
+                      description="FechaInicio"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Output].Columns[FechaInicio]"
+                      name="FechaInicio"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP)(@[User::CurrentDate])</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP)(@[User::CurrentDate])</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Empleados]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].Columns[StaffID_NK]"
+                      cachedDataType="i4"
+                      cachedName="StaffID_NK"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StaffID_NK]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[StaffID_NK]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].Columns[NombreCompleto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="NombreCompleto"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[NombreCompleto]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[NombreCompleto]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].Columns[Telefono]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Telefono"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Telefono]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Telefono]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].Columns[Cargo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="Cargo"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Cargo]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Cargo]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].Columns[TiendaID_NK]"
+                      cachedDataType="i4"
+                      cachedName="TiendaID_NK"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[TiendaID_NK]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[TiendaID_NK]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].Columns[FechaInicio]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="FechaInicio"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[FechaInicio]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Output].Columns[FechaInicio]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmpleadoKey]"
+                      dataType="i4"
+                      name="EmpleadoKey" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[StaffID_NK]"
+                      dataType="i4"
+                      name="StaffID_NK" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="110"
+                      name="NombreCompleto" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Telefono" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[TiendaID_NK]"
+                      dataType="i4"
+                      name="TiendaID_NK" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[EsGerente]"
+                      dataType="bool"
+                      name="EsGerente" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[EsActual]"
+                      dataType="bool"
+                      name="EsActual" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[FechaInicio]"
+                      dataType="dbTimeStamp"
+                      name="FechaInicio" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[FechaFin]"
+                      dataType="dbTimeStamp"
+                      name="FechaFin" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[Dim_Empleados] SET [FechaFin] = ? WHERE [StaffID_NK] = ? AND [FechaFin] IS NULL</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input].Columns[StaffID_NK]"
+                      cachedDataType="i4"
+                      cachedName="StaffID_NK"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID_NK]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input].Columns[FechaFin]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="FechaFin"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Output].Columns[FechaFin]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[Dim_Empleados] SET [Cargo] = ?,[Email] = ?,[NombreCompleto] = ?,[Telefono] = ?,[TiendaID_NK] = ? WHERE [StaffID_NK] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[Cargo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="Cargo"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cargo]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[Email]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[NombreCompleto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="NombreCompleto"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreCompleto]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[StaffID_NK]"
+                      cachedDataType="i4"
+                      cachedName="StaffID_NK"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID_NK]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[Telefono]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Telefono"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]" />
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[TiendaID_NK]"
+                      cachedDataType="i4"
+                      cachedName="TiendaID_NK"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[TiendaID_NK]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="110"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="i4"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+    s.staff_id     AS StaffID_NK,
+    (s.first_name + ' ' + s.last_name) AS NombreCompleto,
+    s.email        AS Email,
+    s.phone        AS Telefono,
+    'Empleado'     AS Cargo,
+    s.store_id     AS TiendaID_NK,
+    CASE 
+        WHEN s.manager_id IS NULL THEN 1  -- sin jefe = gerente
+        ELSE 0                            -- tiene jefe = no gerente
+    END          AS EsGerente
+FROM [dbo].[staffs] AS s;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.BikeStoresStage]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.BikeStoresStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID_NK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StaffID_NK]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID_NK]"
+                      name="StaffID_NK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NombreCompleto]"
+                      length="101"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreCompleto]"
+                      name="NombreCompleto"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Telefono]"
+                      length="25"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]"
+                      name="Telefono"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Cargo]"
+                      length="8"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cargo]"
+                      name="Cargo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[TiendaID_NK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TiendaID_NK]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[TiendaID_NK]"
+                      name="TiendaID_NK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[EsGerente]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EsGerente]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[EsGerente]"
+                      name="EsGerente"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StaffID_NK]"
+                      dataType="i4"
+                      name="StaffID_NK" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      name="NombreCompleto" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Telefono" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TiendaID_NK]"
+                      dataType="i4"
+                      name="TiendaID_NK" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EsGerente]"
+                      dataType="i4"
+                      name="EsGerente" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StaffID_NK]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StaffID_NK]"
+                      name="StaffID_NK" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NombreCompleto]"
+                      name="NombreCompleto" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Telefono]"
+                      name="Telefono" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Cargo]"
+                      name="Cargo" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TiendaID_NK]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TiendaID_NK]"
+                      name="TiendaID_NK" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EsGerente]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EsGerente]"
+                      name="EsGerente" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Slowly Changing Dimension;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
+              description="Updates a SQL Server Analysis Services data warehouse dimension. Update dimension records that are already present and  insert dimension records that aren't. For example, update the DimProduct table of the AdventureWorksDW OLAP database with data from the Products table in the AdventureWorks OLTP database."
+              name="Slowly Changing Dimension"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SELECT statement used to create a schema rowset."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [Cargo], [Email], [NombreCompleto], [StaffID_NK], [Telefono], [TiendaID_NK],[FechaInicio],[FechaFin] FROM [dbo].[Dim_Empleados]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the WHERE clause in the SELECT statement that selects the current row among rows with identical business keys."
+                  name="CurrentRowWhere">[FechaInicio] IS NOT NULL AND [FechaFin] IS NULL</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether historical attribute updates are directed to the transformation output for changing attribute updates."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when columns with fixed attributes contain changes."
+                  name="FailOnFixedAttributeChange">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the column name for the inferred member."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether inferred member updates are detected."
+                  name="EnableInferredMember">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the transformation fails when a lookup of an existing record fails."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies that all rows in the input are new or the transformation detects the change type."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Connections[LookupConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.BikeStoresDW]"
+                  description="Defines the connection to use for lookups in the dimension table"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
+                  name="Slowly Changing Dimension Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[Cargo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="Cargo"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Cargo]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cargo]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[Email]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Email]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[NombreCompleto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="NombreCompleto"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[NombreCompleto]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreCompleto]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[StaffID_NK]"
+                      cachedDataType="i4"
+                      cachedName="StaffID_NK"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[StaffID_NK]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID_NK]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[Telefono]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Telefono"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Telefono]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[TiendaID_NK]"
+                      cachedDataType="i4"
+                      cachedName="TiendaID_NK"
+                      externalMetadataColumnId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[TiendaID_NK]"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[TiendaID_NK]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">3</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NombreCompleto" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[StaffID_NK]"
+                      dataType="i4"
+                      name="StaffID_NK" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Telefono" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[TiendaID_NK]"
+                      dataType="i4"
+                      name="TiendaID_NK" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[FechaInicio]"
+                      dataType="dbTimeStamp"
+                      name="FechaInicio" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[FechaFin]"
+                      dataType="dbTimeStamp"
+                      name="FechaFin" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Outputs[Unchanged Output]"
+                  description="Unchanged rows"
+                  exclusionGroup="1"
+                  name="Unchanged Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Outputs[New Output]"
+                  description="New rows"
+                  exclusionGroup="1"
+                  name="New Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Outputs[Fixed Attribute Output]"
+                  description="Rows with changes in columns tagged FixedAttribute"
+                  exclusionGroup="1"
+                  name="Fixed Attribute Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]"
+                  description="These rows contain new information for ChangingAttribute (Type 1) column changes"
+                  exclusionGroup="1"
+                  name="Changing Attribute Updates Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Outputs[Historical Attribute Inserts Output]"
+                  description="HistoricalAttribute (Type 2) changes result in these new rows"
+                  exclusionGroup="2"
+                  name="Historical Attribute Inserts Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Outputs[Inferred Member Updates Output]"
+                  description="Information to update unpopulated initial dimension row"
+                  exclusionGroup="1"
+                  name="Inferred Member Updates Output"
+                  synchronousInputId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar Dim_Empleados (SCD2)\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 1].Columns[StaffID_NK]"
+                      cachedDataType="i4"
+                      cachedName="StaffID_NK"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID_NK]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[StaffID_NK]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 1].Columns[NombreCompleto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="NombreCompleto"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreCompleto]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[NombreCompleto]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 1].Columns[Email]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Email"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Email]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 1].Columns[Telefono]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Telefono"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Telefono]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 1].Columns[Cargo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="Cargo"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cargo]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Cargo]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 1].Columns[TiendaID_NK]"
+                      cachedDataType="i4"
+                      cachedName="TiendaID_NK"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[TiendaID_NK]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[TiendaID_NK]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 1].Columns[EsGerente]"
+                      cachedDataType="i4"
+                      cachedName="EsGerente"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[EsGerente]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[EsGerente]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 2].Columns[StaffID_NK]"
+                      cachedDataType="i4"
+                      cachedName="StaffID_NK"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID_NK]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[StaffID_NK]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 2].Columns[NombreCompleto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="101"
+                      cachedName="NombreCompleto"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreCompleto]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[NombreCompleto]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 2].Columns[Email]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Email"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Email]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 2].Columns[Telefono]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Telefono"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Telefono]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 2].Columns[Cargo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="Cargo"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cargo]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Cargo]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 2].Columns[TiendaID_NK]"
+                      cachedDataType="i4"
+                      cachedName="TiendaID_NK"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[TiendaID_NK]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[TiendaID_NK]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 2].Columns[EsGerente]"
+                      cachedDataType="i4"
+                      cachedName="EsGerente"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output].Columns[EsGerente]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[EsGerente]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[StaffID_NK]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[StaffID_NK]"
+                      name="StaffID_NK" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="101"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[NombreCompleto]"
+                      name="NombreCompleto" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Telefono]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Telefono]"
+                      name="Telefono" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[Cargo]"
+                      name="Cargo" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[TiendaID_NK]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[TiendaID_NK]"
+                      name="TiendaID_NK" />
+                    <outputColumn
+                      refId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[EsGerente]"
+                      dataType="i4"
+                      lineageId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1].Columns[EsGerente]"
+                      name="EsGerente" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Cargar Dim_Empleados (SCD2).Paths[Derived Column Output]"
+              endId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Derived Column Output"
+              startId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Cargar Dim_Empleados (SCD2).Paths[Derived Column Output1]"
+              endId="Package\Cargar Dim_Empleados (SCD2)\Insert Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Cargar Dim_Empleados (SCD2).Paths[Historical Attribute Inserts Output]"
+              endId="Package\Cargar Dim_Empleados (SCD2)\Derived Column.Inputs[Derived Column Input]"
+              name="Historical Attribute Inserts Output"
+              startId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Outputs[Historical Attribute Inserts Output]" />
+            <path
+              refId="Package\Cargar Dim_Empleados (SCD2).Paths[Inferred Member Updates Output]"
+              endId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1.Inputs[OLE DB Command Input]"
+              name="Inferred Member Updates Output"
+              startId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Outputs[Inferred Member Updates Output]" />
+            <path
+              refId="Package\Cargar Dim_Empleados (SCD2).Paths[New Output]"
+              endId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 1]"
+              name="New Output"
+              startId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Outputs[New Output]" />
+            <path
+              refId="Package\Cargar Dim_Empleados (SCD2).Paths[OLE DB Command Output]"
+              endId="Package\Cargar Dim_Empleados (SCD2)\Union All.Inputs[Union All Input 2]"
+              name="OLE DB Command Output"
+              startId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command.Outputs[OLE DB Command Output]" />
+            <path
+              refId="Package\Cargar Dim_Empleados (SCD2).Paths[OLE DB Source Output]"
+              endId="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
+              name="OLE DB Source Output"
+              startId="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Cargar Dim_Empleados (SCD2).Paths[Union All Output 1]"
+              endId="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1.Inputs[Derived Column Input]"
+              name="Union All Output 1"
+              startId="Package\Cargar Dim_Empleados (SCD2)\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="235,42"
+          Id="Package\Cargar Dim_Empleados (SCD2)"
+          TopLeft="174,141" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Cargar Dim_Empleados (SCD2)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="215.2,41.6"
+          Id="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension"
+          TopLeft="131,107.5" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source"
+          TopLeft="160.5,5.5" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Cargar Dim_Empleados (SCD2)\Derived Column 1"
+          TopLeft="155.5,515.5" />
+        <NodeLayout
+          Size="164,41.6"
+          Id="Package\Cargar Dim_Empleados (SCD2)\Insert Destination"
+          TopLeft="156.5,617.5" />
+        <NodeLayout
+          Size="123.2,41.6"
+          Id="Package\Cargar Dim_Empleados (SCD2)\Union All"
+          TopLeft="177,413.5" />
+        <NodeLayout
+          Size="172,41.6"
+          Id="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command"
+          TopLeft="5.50000000000006,311.5" />
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Cargar Dim_Empleados (SCD2)\OLE DB Command 1"
+          TopLeft="300,209.5" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Cargar Dim_Empleados (SCD2)\Derived Column"
+          TopLeft="20.0000000000001,209.5" />
+        <EdgeLayout
+          Id="Package\Cargar Dim_Empleados (SCD2).Paths[Union All Output 1]"
+          TopLeft="238.5,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar Dim_Empleados (SCD2).Paths[OLE DB Source Output]"
+          TopLeft="238.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar Dim_Empleados (SCD2).Paths[OLE DB Command Output]"
+          TopLeft="91.5000000000001,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="127.833333333333,60"
+              Start="0,0"
+              End="127.833333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.53772070626" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.53772070626"
+                    Point2="0,35.53772070626"
+                    Point3="4,35.53772070626" />
+                  <mssgle:LineSegment
+                    End="123.833333333333,35.53772070626" />
+                  <mssgle:CubicBezierSegment
+                    Point1="123.833333333333,35.53772070626"
+                    Point2="127.833333333333,35.53772070626"
+                    Point3="127.833333333333,39.53772070626" />
+                  <mssgle:LineSegment
+                    End="127.833333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar Dim_Empleados (SCD2).Paths[New Output]"
+          TopLeft="238.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19.1666666666667,264"
+              Start="0,0"
+              End="19.1666666666667,256.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,152.365971107544" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,152.365971107544"
+                    Point2="0,156.365971107544"
+                    Point3="4,156.365971107544" />
+                  <mssgle:LineSegment
+                    End="15.1666666666667,156.365971107544" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.1666666666667,156.365971107544"
+                    Point2="19.1666666666667,156.365971107544"
+                    Point3="19.1666666666667,160.365971107544" />
+                  <mssgle:LineSegment
+                    End="19.1666666666667,256.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-17.4780533854166,161.365971107544,54.1827734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar Dim_Empleados (SCD2).Paths[Inferred Member Updates Output]"
+          TopLeft="290.25,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="100.25,60"
+              Start="0,0"
+              End="100.25,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.490045941807" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.490045941807"
+                    Point2="0,20.490045941807"
+                    Point3="4,20.490045941807" />
+                  <mssgle:LineSegment
+                    End="96.25,20.490045941807" />
+                  <mssgle:CubicBezierSegment
+                    Point1="96.25,20.490045941807"
+                    Point2="100.25,20.490045941807"
+                    Point3="100.25,24.490045941807" />
+                  <mssgle:LineSegment
+                    End="100.25,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-24.1879882812499,25.490045941807,148.8059765625,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar Dim_Empleados (SCD2).Paths[Historical Attribute Inserts Output]"
+          TopLeft="186.75,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-88.25,60"
+              Start="0,0"
+              End="-88.25,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.490045941807" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.490045941807"
+                    Point2="0,20.490045941807"
+                    Point3="-4,20.490045941807" />
+                  <mssgle:LineSegment
+                    End="-84.25,20.490045941807" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-84.25,20.490045941807"
+                    Point2="-88.25,20.490045941807"
+                    Point3="-88.25,24.490045941807" />
+                  <mssgle:LineSegment
+                    End="-88.25,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-119.07138671875,25.490045941807,150.1127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar Dim_Empleados (SCD2).Paths[Derived Column Output1]"
+          TopLeft="238.5,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar Dim_Empleados (SCD2).Paths[Derived Column Output]"
+          TopLeft="95.0000000000001,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar Dim_Empleados (SCD2)\Slowly Changing Dimension">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{B9E10E95-C1CC-4EE1-ADBF-480496B82441}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[Dim_Empleados]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[Cargo]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Cargo&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Email&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreCompleto]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;NombreCompleto&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[StaffID_NK]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;StaffID_NK&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[Telefono]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Telefono&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;OLE DB Source.Outputs[OLE DB Source Output].Columns[TiendaID_NK]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;TiendaID_NK&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Derived Column&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Union All&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Derived Column 1&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command 1&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;true&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;true&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn&gt;FechaInicio&lt;/StartDateColumn&gt;
+  &lt;EndDateColumn&gt;FechaFin&lt;/EndDateColumn&gt;
+  &lt;DateVariable&gt;User::CurrentDate&lt;/DateVariable&gt;
+  &lt;EnableInferredSupport&gt;true&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar Dim_Empleados (SCD2)\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar Dim_Empleados (SCD2)\Insert Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
