@@ -51,7 +51,7 @@ Paquetes desarrollados para:
 
 ---
 
-## 🧩 3. Cubo OLAP – SSAS
+## 3. Cubo OLAP – SSAS
 Cubo: **BikeStores_CuboVentas**
 
 ### Measure Group:
