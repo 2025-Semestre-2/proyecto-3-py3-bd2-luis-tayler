@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>dsBikeStoresDW_SQL</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@Cliente">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Object</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@Marca">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Object</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@FechaInicio">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Object</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@FechaFin">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Object</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT
+    p.Categoria,
+    s.NombreTienda          AS Nombre_Tienda,
+    f.Anio,
+    p.Marca,
+    c.NombreCompleto        AS Nombre_Cliente,
+    f.FechaCompleta         AS FechaOrden,
+    SUM(v.MontoBrutoLinea)  AS MontoTotal,
+    SUM(v.MontoNetoLinea)   AS Monto_Neto_Linea,
+    SUM(v.CantidadFacturas) AS Cantidad_Facturas
+FROM dbo.Fact_Ventas      AS v
+JOIN dbo.Dim_Productos    AS p ON v.ProductoKey    = p.ProductoKey
+JOIN dbo.Dim_Clientes     AS c ON v.ClienteKey     = c.ClienteKey
+JOIN dbo.Dim_Sucursales   AS s ON v.SucursalKey    = s.SucursalKey
+JOIN dbo.Dim_Fecha        AS f ON v.FechaOrdenKey  = f.FechaKey
+WHERE
+    (@Cliente     IS NULL OR c.NombreCompleto = @Cliente)
+    AND (@Marca       IS NULL OR p.Marca          = @Marca)
+    AND (@FechaInicio IS NULL OR f.FechaCompleta &gt;= @FechaInicio)
+    AND (@FechaFin    IS NULL OR f.FechaCompleta &lt;= @FechaFin)
+GROUP BY
+    p.Categoria,
+    s.NombreTienda,
+    f.Anio,
+    p.Marca,
+    c.NombreCompleto,
+    f.FechaCompleta
+ORDER BY
+    p.Categoria,
+    s.NombreTienda,
+    f.Anio,
+    f.FechaCompleta;</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="Categoria">
+        <DataField>Categoria</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Nombre_Tienda">
+        <DataField>Nombre_Tienda</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Anio">
+        <DataField>Anio</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="Marca">
+        <DataField>Marca</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Nombre_Cliente">
+        <DataField>Nombre_Cliente</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="FechaOrden">
+        <DataField>FechaOrden</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="MontoTotal">
+        <DataField>MontoTotal</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="Monto_Neto_Linea">
+        <DataField>Monto_Neto_Linea</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="Cantidad_Facturas">
+        <DataField>Cantidad_Facturas</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

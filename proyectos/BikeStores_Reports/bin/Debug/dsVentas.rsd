@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>AS_BikeStores</DataSourceReference>
+      <CommandText>SELECT
+{
+    [Measures].[Monto Total],
+    [Measures].[Monto Neto Linea],
+    [Measures].[Cantidad Facturas]
+} ON COLUMNS,
+
+NON EMPTY
+(
+    [Dim Productos].[Categoria].[Categoria].ALLMEMBERS *
+    [Dim Sucursales].[Nombre Tienda].[Nombre Tienda].ALLMEMBERS *
+    [Dim Fecha Orden].[Calendario].[Anio].ALLMEMBERS
+) ON ROWS
+
+FROM [DSV_BikeStoresDW]</CommandText>
+      <rd:DesignerState>
+        <QueryDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition">
+          <CommandType>MDX</CommandType>
+          <Type>Query</Type>
+          <QuerySpecification xsi:type="MDXQuerySpecification">
+            <Select>
+              <Items>
+                <Item>
+                  <ID xsi:type="Level">
+                    <DimensionName>Dim Productos</DimensionName>
+                    <HierarchyName>Categoria</HierarchyName>
+                    <HierarchyUniqueName>[Dim Productos].[Categoria]</HierarchyUniqueName>
+                    <LevelName>Categoria</LevelName>
+                    <UniqueName>[Dim Productos].[Categoria].[Categoria]</UniqueName>
+                  </ID>
+                  <ItemCaption>Categoria</ItemCaption>
+                </Item>
+                <Item>
+                  <ID xsi:type="Level">
+                    <DimensionName>Dim Sucursales</DimensionName>
+                    <HierarchyName>Nombre Tienda</HierarchyName>
+                    <HierarchyUniqueName>[Dim Sucursales].[Nombre Tienda]</HierarchyUniqueName>
+                    <LevelName>Nombre Tienda</LevelName>
+                    <UniqueName>[Dim Sucursales].[Nombre Tienda].[Nombre Tienda]</UniqueName>
+                  </ID>
+                  <ItemCaption>Nombre Tienda</ItemCaption>
+                </Item>
+                <Item>
+                  <ID xsi:type="Level">
+                    <DimensionName>Dim Fecha Orden</DimensionName>
+                    <HierarchyName>Calendario</HierarchyName>
+                    <HierarchyUniqueName>[Dim Fecha Orden].[Calendario]</HierarchyUniqueName>
+                    <LevelName>Anio</LevelName>
+                    <UniqueName>[Dim Fecha Orden].[Calendario].[Anio]</UniqueName>
+                  </ID>
+                  <ItemCaption>Anio</ItemCaption>
+                </Item>
+                <Item>
+                  <ID xsi:type="Measure">
+                    <MeasureName>Monto Total</MeasureName>
+                    <UniqueName>[Measures].[Monto Total]</UniqueName>
+                  </ID>
+                  <ItemCaption>Monto Total</ItemCaption>
+                  <FormattedValue>true</FormattedValue>
+                </Item>
+                <Item>
+                  <ID xsi:type="Measure">
+                    <MeasureName>Monto Neto Linea</MeasureName>
+                    <UniqueName>[Measures].[Monto Neto Linea]</UniqueName>
+                  </ID>
+                  <ItemCaption>Monto Neto Linea</ItemCaption>
+                  <FormattedValue>true</FormattedValue>
+                </Item>
+                <Item>
+                  <ID xsi:type="Measure">
+                    <MeasureName>Cantidad Facturas</MeasureName>
+                    <UniqueName>[Measures].[Cantidad Facturas]</UniqueName>
+                  </ID>
+                  <ItemCaption>Cantidad Facturas</ItemCaption>
+                  <FormattedValue>true</FormattedValue>
+                </Item>
+              </Items>
+            </Select>
+            <AutoExecute>false</AutoExecute>
+            <From>DSV_BikeStoresDW</From>
+            <Filter>
+              <FilterItems />
+            </Filter>
+            <Calculations />
+            <Aggregates />
+            <QueryProperties />
+          </QuerySpecification>
+          <Query>
+            <Statement>SELECT
+{
+    [Measures].[Monto Total],
+    [Measures].[Monto Neto Linea],
+    [Measures].[Cantidad Facturas]
+} ON COLUMNS,
+
+NON EMPTY
+(
+    [Dim Productos].[Categoria].[Categoria].ALLMEMBERS *
+    [Dim Sucursales].[Nombre Tienda].[Nombre Tienda].ALLMEMBERS *
+    [Dim Fecha Orden].[Calendario].[Anio].ALLMEMBERS
+) ON ROWS
+
+FROM [DSV_BikeStoresDW]
+</Statement>
+            <ParameterDefinitions />
+          </Query>
+        </QueryDefinition>
+      </rd:DesignerState>
+    </Query>
+    <Fields>
+      <Field Name="Categoria">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Dim Productos].[Categoria].[Categoria]" /&gt;</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Nombre_Tienda">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Dim Sucursales].[Nombre Tienda].[Nombre Tienda]" /&gt;</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Anio">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Dim Fecha Orden].[Calendario].[Anio]" /&gt;</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Monto_Total">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[Monto Total]" /&gt;</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="Monto_Neto_Linea">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[Monto Neto Linea]" /&gt;</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="Cantidad_Facturas">
+        <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[Cantidad Facturas]" /&gt;</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>
