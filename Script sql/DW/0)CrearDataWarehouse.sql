@@ -17,7 +17,7 @@ GO
 -- Dim_Fecha (Dimensión de Tiempo)
 -- ==========================================
 CREATE TABLE Dim_Fecha (
-    FechaKey          INT         NOT NULL PRIMARY KEY, -- formato yyyymmdd
+    FechaKey          INT         NOT NULL PRIMARY KEY,
     FechaCompleta     DATE        NOT NULL,
     Anio              INT         NOT NULL,
     Mes               INT         NOT NULL,
@@ -35,12 +35,12 @@ GO
 CREATE TABLE Dim_Clientes (
     ClienteKey        INT IDENTITY(1,1) PRIMARY KEY,
     ClienteID_NK      INT          NOT NULL,
-    NombreCompleto    VARCHAR(520) NOT NULL,  -- Aumentado para first_name (255) + last_name (255) + espacio
-    Email             VARCHAR(255) NULL,       -- Coincide con origen
-    Telefono          VARCHAR(25)  NULL,       -- Ajustado a origen (25)
-    Ciudad            VARCHAR(50)  NULL,       -- Ajustado a origen (50)
-    Estado            VARCHAR(25)  NULL,       -- Ajustado a origen (25)
-    CodigoPostal      VARCHAR(5)   NULL,       -- Ajustado a origen (5)
+    NombreCompleto    VARCHAR(520) NOT NULL,
+    Email             VARCHAR(255) NULL,     
+    Telefono          VARCHAR(25)  NULL,       
+    Ciudad            VARCHAR(50)  NULL,     
+    Estado            VARCHAR(25)  NULL,     
+    CodigoPostal      VARCHAR(5)   NULL,       
     Pais              VARCHAR(100) NULL,
 
     EsActual          BIT          NOT NULL 
@@ -56,10 +56,10 @@ GO
 -- ==========================================
 CREATE TABLE Dim_Empleados (
     EmpleadoKey       INT IDENTITY(1,1) PRIMARY KEY,
-    StaffID_NK        INT          NOT NULL,              -- Natural Key (staff_id)
-    NombreCompleto    VARCHAR(110) NOT NULL,              -- Ajustado: first_name (50) + last_name (50) + espacio
-    Email             VARCHAR(255) NULL,                  -- Coincide con origen
-    Telefono          VARCHAR(25)  NULL,                  -- Ajustado a origen (25)
+    StaffID_NK        INT          NOT NULL,              
+    NombreCompleto    VARCHAR(110) NOT NULL,              
+    Email             VARCHAR(255) NULL,                 
+    Telefono          VARCHAR(25)  NULL,                  
     Cargo             VARCHAR(100) NULL,
     TiendaID_NK       INT          NULL,                     
     EsGerente         BIT          NULL,
@@ -77,11 +77,11 @@ GO
 -- ==========================================
 CREATE TABLE Dim_Productos (
     ProductoKey       INT IDENTITY(1,1) PRIMARY KEY,
-    ProductID_NK      INT          NOT NULL,              -- product_id original
-    NombreProducto    VARCHAR(255) NOT NULL,              -- Coincide con origen
-    Marca             VARCHAR(255) NOT NULL,              -- Coincide con origen (brand_name)
-    Categoria         VARCHAR(255) NOT NULL,              -- Coincide con origen (category_name)
-    ModeloAnio        SMALLINT     NULL,                  -- Cambiado a SMALLINT como en origen
+    ProductID_NK      INT          NOT NULL,             
+    NombreProducto    VARCHAR(255) NOT NULL,             
+    Marca             VARCHAR(255) NOT NULL,              
+    Categoria         VARCHAR(255) NOT NULL,              
+    ModeloAnio        SMALLINT     NULL,                  
     PrecioLista       DECIMAL(10,2) NULL,
     Color             VARCHAR(150)  NULL,
     Tamaño            VARCHAR(150)  NULL,
@@ -94,14 +94,14 @@ GO
 -- ==========================================
 CREATE TABLE Dim_Sucursales (
     SucursalKey       INT IDENTITY(1,1) PRIMARY KEY,
-    StoreID_NK        INT          NOT NULL,              -- store_id original
-    NombreTienda      VARCHAR(255) NOT NULL,              -- Coincide con origen
-    Telefono          VARCHAR(25)  NULL,                  -- Ajustado a origen (25)
-    Email             VARCHAR(255) NULL,                  -- Coincide con origen
-    Calle             VARCHAR(255) NULL,                  -- Coincide con origen
-    Ciudad            VARCHAR(255) NULL,                  -- Ajustado a origen (255)
-    Estado            VARCHAR(10)  NULL,                  -- Ajustado a origen (10)
-    CodigoPostal      VARCHAR(5)   NULL,                  -- Ajustado a origen (5)
+    StoreID_NK        INT          NOT NULL,              
+    NombreTienda      VARCHAR(255) NOT NULL,              
+    Telefono          VARCHAR(25)  NULL,                  
+    Email             VARCHAR(255) NULL,                  
+    Calle             VARCHAR(255) NULL,                  
+    Ciudad            VARCHAR(255) NULL,                  
+    Estado            VARCHAR(10)  NULL,                  
+    CodigoPostal      VARCHAR(5)   NULL,                 
     Pais              VARCHAR(100) NULL
 );
 GO
@@ -111,10 +111,10 @@ GO
 -- ==========================================
 CREATE TABLE Dim_Ordenes (
     OrdenKey          INT IDENTITY(1,1) PRIMARY KEY, 
-    OrderID_NK        INT          NOT NULL,              -- order_id original
-    EstadoOrden       VARCHAR(50)  NULL,                  -- status
+    OrderID_NK        INT          NOT NULL,              
+    EstadoOrden       VARCHAR(50)  NULL,                  
     MetodoEnvio       VARCHAR(100) NULL,             
-    Comentarios       VARCHAR(1000) NULL                  -- Aumentado para comentarios largos
+    Comentarios       VARCHAR(1000) NULL                 
 );
 GO
 
@@ -149,7 +149,7 @@ CREATE TABLE Fact_Ventas (
     -- Métricas
     CantidadVendida       INT           NOT NULL,
     PrecioUnitario        DECIMAL(10,2) NOT NULL,
-    DescuentoUnitario     DECIMAL(4,2)  NOT NULL,  -- Ajustado a DECIMAL(4,2) como en origen
+    DescuentoUnitario     DECIMAL(4,2)  NOT NULL, 
 
     MontoBrutoLinea       AS (CantidadVendida * PrecioUnitario) PERSISTED,
     MontoDescuentoLinea   AS (CantidadVendida * DescuentoUnitario) PERSISTED,

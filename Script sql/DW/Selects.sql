@@ -3,7 +3,7 @@
 -- Conexión: BikeStoresStage
 -- ==========================================
 
--- Clientes (Dim_Clientes - SCD Tipo 2):
+-- Clientes (Dim_Clientes - SCD Tipo 2)
 SELECT 
     customer_id AS ClienteID_NK,
     (first_name + ' ' + last_name) AS NombreCompleto,
@@ -15,7 +15,7 @@ SELECT
     'USA' AS Pais
 FROM [dbo].[customers];
 
--- Empleados (Dim_Empleados - SCD Tipo 2):
+-- Empleados (Dim_Empleados - SCD Tipo 2)
 SELECT 
     s.staff_id     AS StaffID_NK,
     (s.first_name + ' ' + s.last_name) AS NombreCompleto,
@@ -24,12 +24,12 @@ SELECT
     'Empleado'     AS Cargo,
     s.store_id     AS TiendaID_NK,
     CASE 
-        WHEN s.manager_id IS NULL THEN 1  -- sin jefe = gerente
-        ELSE 0                            -- tiene jefe = no gerente
+        WHEN s.manager_id IS NULL THEN 1  
+        ELSE 0                            
     END          AS EsGerente
 FROM [dbo].[staffs] AS s;
 
--- Productos (Dim_Productos - SCD Tipo 1):
+-- Productos (Dim_Productos - SCD Tipo 1)
 SELECT 
     p.product_id        AS ProductID_NK,
     p.product_name      AS NombreProducto,
@@ -44,7 +44,7 @@ FROM [dbo].[products] AS p
 INNER JOIN [dbo].[brands]     AS b ON p.brand_id    = b.brand_id
 INNER JOIN [dbo].[categories] AS c ON p.category_id = c.category_id;
 
--- Sucursales/Tiendas (Dim_Sucursales - SCD Tipo 1):
+-- Sucursales/Tiendas (Dim_Sucursales - SCD Tipo 1)
 SELECT 
     s.store_id     AS StoreID_NK,
     s.store_name   AS NombreTienda,

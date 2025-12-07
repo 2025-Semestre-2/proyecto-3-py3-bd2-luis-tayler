@@ -1,26 +1,25 @@
 USE BikeStoresDW;
 GO
 
-PRINT 'Eliminando Foreign Keys dinámicamente...';
-
+PRINT 'Eliminando Foreign Keys...';
 -- ==============================================
--- 1. DROPEAR TODAS LAS FOREIGN KEYS DEL DW
+-- 1. ELIMINAR TODAS LAS FOREIGN KEYS
 -- ==============================================
-DECLARE @sql NVARCHAR(MAX) = N'';
-
-SELECT @sql = @sql +
-'ALTER TABLE [' + OBJECT_SCHEMA_NAME(parent_object_id) + '].[' + OBJECT_NAME(parent_object_id) + ']' +
-' DROP CONSTRAINT [' + name + '];' + CHAR(13)
-FROM sys.foreign_keys;
-
-EXEC sp_executesql @sql;
+ALTER TABLE Fact_Ventas DROP CONSTRAINT IF EXISTS FK_FactVentas_DimFechaOrden;
+ALTER TABLE Fact_Ventas DROP CONSTRAINT IF EXISTS FK_FactVentas_DimFechaReq;
+ALTER TABLE Fact_Ventas DROP CONSTRAINT IF EXISTS FK_FactVentas_DimFechaEnv;
+ALTER TABLE Fact_Ventas DROP CONSTRAINT IF EXISTS FK_FactVentas_DimClientes;
+ALTER TABLE Fact_Ventas DROP CONSTRAINT IF EXISTS FK_FactVentas_DimEmpleados;
+ALTER TABLE Fact_Ventas DROP CONSTRAINT IF EXISTS FK_FactVentas_DimSucursales;
+ALTER TABLE Fact_Ventas DROP CONSTRAINT IF EXISTS FK_FactVentas_DimProductos;
+ALTER TABLE Fact_Ventas DROP CONSTRAINT IF EXISTS FK_FactVentas_DimOrdenes;
 
 PRINT 'Foreign Keys eliminadas correctamente.';
 
 -- ==============================================
--- 2. DROPEAR TODAS LAS TABLAS DEL DW (orden controlado)
+-- 2. ELIMINAR TODAS LAS TABLAS DEL DW
 -- ==============================================
-PRINT 'Dropping all DW tables...';
+PRINT 'Eliminando todas las tablas del DW...';
 
 DROP TABLE IF EXISTS Fact_Ventas;
 DROP TABLE IF EXISTS Dim_Inventario;
@@ -32,5 +31,4 @@ DROP TABLE IF EXISTS Dim_Clientes;
 DROP TABLE IF EXISTS Dim_Fecha;
 
 PRINT 'Todas las tablas han sido eliminadas correctamente.';
-
-
+GO
